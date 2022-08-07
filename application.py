@@ -10,7 +10,7 @@ from keras.applications.resnet_v2 import preprocess_input
 import io
 # from Google import Create_Service
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 CLIENT_SECRET_FILE = 'client_secret.json'
 API_NAME = 'driver'
@@ -19,7 +19,7 @@ SCOPES = ['https://www.googleapis.com/auth/drive' + API_VERSION]
 
 # service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
 
-@app.route('/', methods=['GET', 'POST'])
+@application.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
 
@@ -52,7 +52,7 @@ def predict_model(data):
     pred_breed = sorted(new_list)[np.argmax(pred_val)]
     return "Predicted Breed for the selected Dog is : " + pred_breed
 
-@app.route('/model', methods=['GET','POST'])
+@application.route('/model', methods=['GET','POST'])
 def my_form_post():
     file = request.form['file']
     breed_of_dog = predict_model(file)
